@@ -1,0 +1,6 @@
+-   id: requirements-txt-fixer
+    name: Fix requirements txt files
+    description: This hook fix requirements txt files (with support --extra-index-url)
+    entry: requirements-txt-fixer
+    language: python
+    files: requirements.*\.txt$

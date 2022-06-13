@@ -113,8 +113,8 @@ def fix_requirements(f: IO[bytes]) -> int:
         if req.value != b'pkg-resources==0.0.0\n'
     ]
 
+    # Sort requirements list and check/fix index parameters order
     requirements = sorted(requirements)
-
     if any((True if requirement.value.find(b'--extra-index-url')>-1 else False) for requirement in requirements):
         url_index = extra_url_index = None
         for requirement in requirements:
@@ -123,7 +123,6 @@ def fix_requirements(f: IO[bytes]) -> int:
             if requirement.value.find(b'-i')>-1:
                 url_index = requirements.index(requirement)
         if url_index and extra_url_index != None:
-            print('intercambiando indices')
             requirements[url_index], requirements[extra_url_index] = requirements[extra_url_index], requirements[url_index]
 
     for requirement in requirements:
